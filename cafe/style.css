@@ -1,0 +1,847 @@
+/* =========================================
+   1. BASIC SETUP AND COLORS
+   ========================================= */
+:root {
+  --espresso: #2b1b12;
+  --coffee: #4a3224;
+  --caramel: #c8873a;
+  --caramel-dark: #a96d28;
+  --cream: #faf5ee;
+  --latte: #efe4d3;
+  --text: #3a2c24;
+  --muted: #7a6a5e;
+  --white: #ffffff;
+
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  --shadow: 0 10px 30px rgba(43, 27, 18, 0.12);
+  --radius: 16px;
+  --transition: 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--cream);
+  line-height: 1.7;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  width: 90%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   2. HEADER AND NAVIGATION
+   ========================================= */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  color: var(--cream);
+  transition: background var(--transition), box-shadow var(--transition), color var(--transition);
+}
+
+.site-header.scrolled {
+  background: rgba(250, 245, 238, 0.96);
+  color: var(--espresso);
+  box-shadow: 0 2px 20px rgba(43, 27, 18, 0.1);
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.logo span {
+  color: var(--caramel);
+}
+
+.nav ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  padding: 0.3rem 0;
+  transition: color var(--transition);
+}
+
+/* animated underline */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--caramel);
+  transition: width var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: var(--caramel);
+}
+
+/* hamburger button (only shown on small screens) */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: currentColor;
+  border-radius: 3px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* =========================================
+   3. BUTTONS
+   ========================================= */
+.btn {
+  display: inline-block;
+  background: var(--caramel);
+  color: var(--white);
+  padding: 0.9rem 2.2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(200, 135, 58, 0.35);
+  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.btn:hover {
+  background: var(--caramel-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(200, 135, 58, 0.45);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* =========================================
+   4. HERO SECTION
+   ========================================= */
+/* The hero uses 3 layers:
+   1) a dark overlay so the text is easy to read
+   2) your photo images/hero.jpg (optional)
+   3) a warm brown gradient (shown if there is no photo) */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--cream);
+  background:
+    linear-gradient(rgba(35, 22, 15, 0.65), rgba(35, 22, 15, 0.65)),
+    url("images/hero.jpg"),
+    linear-gradient(135deg, #5a3b28, #2b1b12);
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+}
+
+.hero-content {
+  padding: 120px 0 80px;
+  max-width: 800px;
+  animation: fadeUp 1s ease both;
+}
+
+.hero-tag {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85rem;
+  color: var(--caramel);
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+}
+
+.hero-text {
+  font-size: 1.15rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #eadfce;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   5. GENERAL SECTION STYLES
+   ========================================= */
+.section {
+  padding: 6rem 0;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+.section-tag {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--caramel);
+  margin-bottom: 0.6rem;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  color: var(--espresso);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.section-head p:last-child {
+  color: var(--muted);
+}
+
+/* =========================================
+   6. ABOUT SECTION
+   ========================================= */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-visual {
+  min-height: 420px;
+  border-radius: var(--radius);
+  background:
+    url("images/about.jpg"),
+    linear-gradient(145deg, var(--caramel), var(--coffee));
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.about-card {
+  background: rgba(250, 245, 238, 0.95);
+  padding: 1.2rem 1.8rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-number {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: var(--caramel);
+  line-height: 1;
+}
+
+.about-label {
+  font-size: 0.9rem;
+  color: var(--coffee);
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+  color: var(--muted);
+}
+
+.about-points {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0.6rem;
+  font-weight: 600;
+  color: var(--coffee);
+}
+
+/* =========================================
+   7. MENU SECTION
+   ========================================= */
+.menu {
+  background: var(--latte);
+}
+
+.menu-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 2.5rem;
+}
+
+.tab-btn {
+  background: transparent;
+  border: 2px solid var(--caramel);
+  color: var(--coffee);
+  padding: 0.5rem 1.4rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.tab-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(200, 135, 58, 0.15);
+}
+
+.tab-btn.active {
+  background: var(--caramel);
+  color: var(--white);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.menu-item {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 14px rgba(43, 27, 18, 0.07);
+  transition: transform var(--transition), box-shadow var(--transition);
+  animation: fadeUp 0.5s ease both;
+}
+
+.menu-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+.menu-item.hide {
+  display: none;
+}
+
+.menu-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  background: var(--cream);
+  border-radius: 50%;
+}
+
+.menu-info {
+  flex: 1;
+}
+
+.menu-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.menu-info h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--espresso);
+}
+
+.price {
+  font-weight: 700;
+  color: var(--caramel-dark);
+  white-space: nowrap;
+}
+
+.menu-info p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+
+/* =========================================
+   8. GALLERY SECTION
+   ========================================= */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 240px;
+  gap: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 14px rgba(43, 27, 18, 0.1);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.gallery-item.tall {
+  grid-row: span 2;
+}
+
+.gallery-item.wide {
+  grid-column: span 2;
+}
+
+/* each tile: your photo first, warm gradient as backup */
+.g1 { background-image: url("images/gallery-1.jpg"), linear-gradient(160deg, #c8873a, #6b3f22); }
+.g2 { background-image: url("images/gallery-2.jpg"), linear-gradient(135deg, #8a5a3a, #3b2418); }
+.g3 { background-image: url("images/gallery-3.jpg"), linear-gradient(135deg, #e0b074, #a9692f); }
+.g4 { background-image: url("images/gallery-4.jpg"), linear-gradient(135deg, #5a3b28, #c8873a); }
+.g5 { background-image: url("images/gallery-5.jpg"), linear-gradient(135deg, #d99a9a, #8a4a3a); }
+.g6 { background-image: url("images/gallery-6.jpg"), linear-gradient(135deg, #7d8a62, #3d4a2c); }
+
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow);
+  z-index: 2;
+}
+
+.gallery-item span {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 1.2rem 1rem 0.9rem;
+  color: var(--white);
+  font-weight: 600;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
+  transform: translateY(100%);
+  transition: transform var(--transition);
+}
+
+.gallery-item:hover span {
+  transform: translateY(0);
+}
+
+/* =========================================
+   9. CONTACT SECTION
+   ========================================= */
+.contact {
+  background: var(--latte);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.info-block {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.2rem;
+  box-shadow: 0 4px 14px rgba(43, 27, 18, 0.07);
+}
+
+.info-block h3 {
+  font-family: var(--font-heading);
+  color: var(--espresso);
+  margin-bottom: 0.6rem;
+}
+
+.info-block p {
+  color: var(--muted);
+}
+
+.hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed #dccdb8;
+  color: var(--muted);
+}
+
+.hours li:last-child {
+  border-bottom: none;
+}
+
+.contact-form {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--coffee);
+  margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--cream);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--caramel);
+  box-shadow: 0 0 0 4px rgba(200, 135, 58, 0.15);
+}
+
+.form-group.error input,
+.form-group.error textarea {
+  border-color: #c0392b;
+}
+
+.form-message {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+  min-height: 1.5rem;
+}
+
+.form-message.success { color: #2e7d32; }
+.form-message.error { color: #c0392b; }
+
+/* =========================================
+   10. FOOTER
+   ========================================= */
+.footer {
+  background: var(--espresso);
+  color: #cdbfae;
+  padding: 2rem 0;
+}
+
+.footer .logo {
+  color: var(--cream);
+}
+
+.footer-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* =========================================
+   11. SCROLL REVEAL ANIMATION
+   ========================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect people who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================================
+   12. RESPONSIVE: TABLETS (up to 900px)
+   ========================================= */
+@media (max-width: 900px) {
+  .section {
+    padding: 4.5rem 0;
+  }
+
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-visual {
+    min-height: 320px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================
+   13. RESPONSIVE: PHONES (up to 768px)
+   ========================================= */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* the menu becomes a drop-down panel */
+  .nav {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: var(--cream);
+    color: var(--espresso);
+    box-shadow: 0 10px 20px rgba(43, 27, 18, 0.15);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .nav.open {
+    max-height: 400px;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem 5%;
+  }
+
+  .nav li {
+    border-bottom: 1px solid var(--latte);
+  }
+
+  .nav-link {
+    display: block;
+    padding: 1rem 0;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content {
+    padding-top: 100px;
+  }
+}
+
+/* =========================================
+   14. RESPONSIVE: SMALL PHONES (up to 520px)
+   ========================================= */
+@media (max-width: 520px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+  }
+
+  .gallery-item.tall,
+  .gallery-item.wide {
+    grid-row: auto;
+    grid-column: auto;
+  }
+
+  .menu-item {
+    padding: 1.2rem;
+  }
+
+  .menu-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .contact-form {
+    padding: 1.4rem;
+  }
+
+  .footer-wrap {
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* on touch screens there is no hover, so always show the gallery captions */
+  .gallery-item span {
+    transform: translateY(0);
+  }
+}
+/* ORDER DEMO */
+.order-box {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.order-box h2 {
+  margin-bottom: 0.5rem;
+}
+
+.order-note,
+.empty-order {
+  color: var(--muted);
+}
+
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--latte);
+}
+
+.order-row p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.order-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.order-controls button,
+.add-order-btn {
+  border: none;
+  border-radius: 8px;
+  background: var(--caramel);
+  color: white;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.add-order-btn {
+  margin-top: 1rem;
+}
+
+.order-controls button:hover,
+.add-order-btn:hover {
+  background: var(--caramel-dark);
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+}
+
+#orderMessage {
+  margin-top: 1rem;
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .order-box {
+    padding: 1.2rem;
+  }
+
+  .order-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
