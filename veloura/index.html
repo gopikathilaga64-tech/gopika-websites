@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="VELOURA - editorial luxury fashion for women and men. A demo store built for a web development portfolio.">
+  <meta name="theme-color" content="#0a0908">
+  <title>VELOURA | Quiet Luxury Fashion</title>
+
+  <!-- Marks the page as "JavaScript is on". The CSS uses this so nothing stays hidden if JavaScript fails. -->
+  <script>document.documentElement.classList.add("js");</script>
+
+  <!-- Google Fonts (free). If they fail to load, the CSS falls back to Georgia and system fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Your styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Page-load curtain. It lifts by itself, even without JavaScript. -->
+  <div class="page-veil" id="pageVeil" aria-hidden="true">
+    <span class="page-veil-logo">VELOURA</span>
+  </div>
+
+  <!-- ===== ICON SET (small line icons used across the page; hidden from view) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="icon-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="icon-minus" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12M10 11v5M14 11v5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor"/></symbol>
+    <symbol id="icon-youtube" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10 9.5l5 2.5-5 2.5z" fill="currentColor"/></symbol>
+    <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M14 8h2.2V4.5H13.5C10.9 4.5 10 6.1 10 8.2V10H8v3.5h2V20h3.5v-6.5h2.4l.5-3.5h-2.9V8.7c0-.5.2-.7.5-.7z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <!-- Lets keyboard users jump straight to the content -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ===== 2. NAVIGATION ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#arrivals" class="nav-link">New In</a></li>
+          <li><a href="#collections" class="nav-link">Collections</a></li>
+          <li><a href="#story" class="nav-link">The House</a></li>
+          <li><a href="#campaign" class="nav-link">Campaign</a></li>
+          <li><a href="#newsletter" class="nav-link">Journal</a></li>
+        </ul>
+      </nav>
+
+      <a href="#home" class="logo" aria-label="VELOURA - back to top">VELOURA</a>
+
+      <button class="bag-button" id="bagButton" type="button" aria-haspopup="dialog" aria-controls="bagDrawer" aria-label="Open shopping bag, 0 items">
+        <span class="bag-button-label">Bag</span>
+        <span class="bag-icon-wrap">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-bag"></use></svg>
+          <span class="bag-count" id="bagCount" aria-hidden="true">0</span>
+        </span>
+      </button>
+
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== 3. HERO ===== -->
+    <section class="hero" id="home" aria-labelledby="heroTitle">
+
+      <!-- background photo (images/hero.jpg) with a gradient behind it -->
+      <div class="hero-media" aria-hidden="true">
+        <img src="images/hero.jpg" alt="" width="1920" height="1280" fetchpriority="high" decoding="async">
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <!-- 3D gold sculpture. Three.js draws into the canvas.
+           If Three.js or WebGL is not available, the CSS rings below are shown instead. -->
+      <div class="hero-stage" aria-hidden="true">
+        <canvas class="hero-canvas" id="heroCanvas"></canvas>
+        <div class="hero-fallback" id="heroFallback">
+          <span class="ring ring-1"></span>
+          <span class="ring ring-2"></span>
+          <span class="ring ring-3"></span>
+        </div>
+      </div>
+
+      <div class="container hero-content">
+        <p class="eyebrow hero-eyebrow">Autumn / Winter Collection</p>
+
+        <h1 class="hero-title" id="heroTitle">
+          <span class="line"><span class="line-inner">The art of</span></span>
+          <span class="line"><span class="line-inner">quiet <em>luxury</em>.</span></span>
+        </h1>
+
+        <p class="hero-text">
+          Considered silhouettes, soft tailoring and rich textures,
+          designed to be worn for years and remembered for longer.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#arrivals" class="btn btn-gold" data-magnetic>Shop Collection</a>
+          <a href="#story" class="link-arrow">
+            Discover the House
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
+          </a>
+        </div>
+      </div>
+
+      <a href="#collections" class="scroll-cue" aria-label="Scroll to the collections">
+        <span class="scroll-cue-line"></span>
+        <span class="scroll-cue-text">Scroll</span>
+      </a>
+    </section>
+
+    <!-- Decorative moving strip of words (hidden from screen readers) -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Tailoring</span><span>Knitwear</span><span>Silk</span><span>Leather</span><span>Outerwear</span><span>Accessories</span>
+        <span>Tailoring</span><span>Knitwear</span><span>Silk</span><span>Leather</span><span>Outerwear</span><span>Accessories</span>
+      </div>
+    </div>
+
+    <!-- ===== 4. FEATURED COLLECTIONS ===== -->
+    <section class="section collections" id="collections" aria-labelledby="collectionsTitle">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="eyebrow" data-reveal>Featured Collections</p>
+          <h2 class="section-title" id="collectionsTitle" data-reveal>Three ways to wear Veloura</h2>
+        </div>
+
+        <div class="collection-grid">
+
+          <a href="#arrivals" class="collection-card" data-filter-link="women" data-reveal>
+            <div class="media collection-media">
+              <img src="images/collection-women.jpg" alt="Model wearing a long black coat from the Women's collection" width="800" height="1100" loading="lazy" decoding="async">
+            </div>
+            <div class="collection-info">
+              <span class="collection-number">01</span>
+              <h3>Women</h3>
+              <span class="collection-link">Shop Women <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg></span>
+            </div>
+          </a>
+
+          <a href="#arrivals" class="collection-card" data-filter-link="men" data-reveal>
+            <div class="media collection-media">
+              <img src="images/collection-men.jpg" alt="Model wearing a tailored dark suit from the Men's collection" width="800" height="1100" loading="lazy" decoding="async">
+            </div>
+            <div class="collection-info">
+              <span class="collection-number">02</span>
+              <h3>Men</h3>
+              <span class="collection-link">Shop Men <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg></span>
+            </div>
+          </a>
+
+          <a href="#arrivals" class="collection-card" data-filter-link="accessories" data-reveal>
+            <div class="media collection-media">
+              <img src="images/collection-accessories.jpg" alt="A leather handbag and gold jewellery from the Accessories collection" width="800" height="1100" loading="lazy" decoding="async">
+            </div>
+            <div class="collection-info">
+              <span class="collection-number">03</span>
+              <h3>Accessories</h3>
+              <span class="collection-link">Shop Accessories <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg></span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. NEW ARRIVALS (PRODUCTS AND FILTERS) ===== -->
+    <section class="section arrivals" id="arrivals" aria-labelledby="arrivalsTitle">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="eyebrow" data-reveal>New Arrivals</p>
+          <h2 class="section-title" id="arrivalsTitle" data-reveal>The latest pieces</h2>
+          <p class="section-lead" data-reveal>Sample products and prices for this portfolio demo.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter products by category" data-reveal>
+          <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-btn" data-filter="women" aria-pressed="false">Women</button>
+          <button type="button" class="filter-btn" data-filter="men" aria-pressed="false">Men</button>
+          <button type="button" class="filter-btn" data-filter="accessories" aria-pressed="false">Accessories</button>
+        </div>
+        
+<div class="product-search">
+  <input
+    type="search"
+    id="productSearch"
+    placeholder="Search products..."
+    aria-label="Search products"
+  >
+</div>
+
+
+        <p class="filter-status" id="filterStatus" role="status" aria-live="polite"></p>
+
+        <div class="product-grid" id="productGrid">
+
+          <article class="product-card" data-id="vel-001" data-name="Silk Column Dress" data-price="890" data-category="women" data-tilt data-reveal>
+            <div class="media product-media">
+              <img src="images/product-1.jpg" alt="Model wearing the Silk Column Dress in black" width="800" height="1000" loading="lazy" decoding="async">
+              <span class="product-badge">New</span>
+              <button type="button" class="quick-add" aria-label="Add Silk Column Dress to bag">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg>
+                <span>Add to Bag</span>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Women</p>
+              <h3 class="product-name">Silk Column Dress</h3>
+              <p class="product-price">$890</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-id="vel-002" data-name="Tailored Wool Coat" data-price="1250" data-category="women" data-tilt data-reveal>
+            <div class="media product-media">
+              <img src="images/product-2.jpg" alt="Model wearing the Tailored Wool Coat in camel" width="800" height="1000" loading="lazy" decoding="async">
+              <button type="button" class="quick-add" aria-label="Add Tailored Wool Coat to bag">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg>
+                <span>Add to Bag</span>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Women</p>
+              <h3 class="product-name">Tailored Wool Coat</h3>
+              <p class="product-price">$1,250</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-id="vel-003" data-name="Cashmere Wrap Knit" data-price="540" data-category="women" data-tilt data-reveal>
+            <div class="media product-media">
+              <img src="images/product-3.jpg" alt="Model wearing the Cashmere Wrap Knit in cream" width="800" height="1000" loading="lazy" decoding="async">
+              <span class="product-badge">New</span>
+              <button type="button" class="quick-add" aria-label="Add Cashmere Wrap Knit to bag">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg>
+                <span>Add to Bag</span>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Women</p>
+              <h3 class="product-name">Cashmere Wrap Knit</h3>
+              <p class="product-price">$540</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-id="vel-004" data-name="Merino Roll-Neck" data-price="420" data-category="men" data-tilt data-reveal>
+            <div class="media product-media">
+              <img src="images/product-4.jpg" alt="Model wearing the Merino Roll-Neck in charcoal" width="800" height="1000" loading="lazy" decoding="async">
+              <button type="button" class="quick-add" aria-label="Add Merino Roll-Neck to bag">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg>
+                <span>Add to Bag</span>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Men</p>
+              <h3 class="product-name">Merino Roll-Neck</h3>
+              <p class="product-price">$420</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-id="vel-005" data-name="Double-Breasted Blazer" data-price="1150" data-category="men" data-tilt data-reveal>
+            <div class="media product-media">
+              <img src="images/product-5.jpg" alt="Model wearing the Double-Breasted Blazer in black" width="800" height="1000" loading="lazy" decoding="async">
+              <span class="product-badge">New</span>
+              <button type="button" class="quick-add" aria-label="Add Double-Breasted Blazer to bag">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg>
+                <span>Add to Bag</span>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Men</p>
+              <h3 class="product-name">Double-Breasted Blazer</h3>
+              <p class="product-price">$1,150</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-id="vel-006" data-name="Pleated Wool Trousers" data-price="480" data-category="men" data-tilt data-reveal>
+            <div class="media product-media">
+              <img src="images/product-6.jpg" alt="Model wearing Pleated Wool Trousers in stone" width="800" height="1000" loading="lazy" decoding="async">
+              <button type="button" class="quick-add" aria-label="Add Pleated Wool Trousers to bag">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg>
+                <span>Add to Bag</span>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Men</p>
+              <h3 class="product-name">Pleated Wool Trousers</h3>
+              <p class="product-price">$480</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-id="vel-007" data-name="Leather Structured Tote" data-price="1380" data-category="accessories" data-tilt data-reveal>
+            <div class="media product-media">
+              <img src="images/product-7.jpg" alt="The Leather Structured Tote in black" width="800" height="1000" loading="lazy" decoding="async">
+              <span class="product-badge">New</span>
+              <button type="button" class="quick-add" aria-label="Add Leather Structured Tote to bag">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg>
+                <span>Add to Bag</span>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Accessories</p>
+              <h3 class="product-name">Leather Structured Tote</h3>
+              <p class="product-price">$1,380</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-id="vel-008" data-name="Gold Sculpted Earrings" data-price="260" data-category="accessories" data-tilt data-reveal>
+            <div class="media product-media">
+              <img src="images/product-8.jpg" alt="Gold sculpted earrings on a neutral background" width="800" height="1000" loading="lazy" decoding="async">
+              <button type="button" class="quick-add" aria-label="Add Gold Sculpted Earrings to bag">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg>
+                <span>Add to Bag</span>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Accessories</p>
+              <h3 class="product-name">Gold Sculpted Earrings</h3>
+              <p class="product-price">$260</p>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="empty-products" id="noProducts" hidden>No products in this category yet.</p>
+
+      </div>
+    </section>
+
+    <!-- ===== 6. BRAND STORY ===== -->
+    <section class="section story" id="story" aria-labelledby="storyTitle">
+      <div class="container story-grid">
+
+        <div class="story-visual" data-reveal>
+          <div class="media story-media">
+            <img src="images/story.jpg" alt="A designer's studio with fabric swatches and a tailored jacket on a mannequin" width="900" height="1100" loading="lazy" decoding="async">
+          </div>
+          <span class="story-frame" aria-hidden="true"></span>
+        </div>
+
+        <div class="story-copy">
+          <p class="eyebrow" data-reveal>The House of Veloura</p>
+          <h2 class="section-title" id="storyTitle" data-reveal>Made slowly. Worn for years.</h2>
+          <p data-reveal>
+            Veloura is built on a simple belief: the most luxurious thing you can
+            wear is something that feels effortless. We favour clean lines,
+            generous fabrics and craftsmanship you can feel before you see it.
+          </p>
+          <p data-reveal>
+            Every collection is designed in small, considered runs, with natural
+            materials chosen for how they age, so each piece becomes more
+            yours with time.
+          </p>
+
+          <ul class="values" data-reveal>
+            <li><span class="values-number">I</span> Considered materials</li>
+            <li><span class="values-number">II</span> Timeless silhouettes</li>
+            <li><span class="values-number">III</span> Made to last</li>
+          </ul>
+
+          <p class="demo-note" data-reveal>Sample brand copy for this portfolio demo.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 7. EDITORIAL CAMPAIGN ===== -->
+    <section class="section campaign" id="campaign" aria-labelledby="campaignTitle">
+      <div class="container">
+
+        <div class="campaign-head">
+          <p class="eyebrow" data-reveal>The Campaign</p>
+          <h2 class="campaign-title" id="campaignTitle" data-reveal>The <em>Dark Hour</em> Edit</h2>
+          <p class="campaign-text" data-reveal>
+            A study in shadow, silk and gold light. Shot after sunset,
+            styled to be worn well into the night.
+          </p>
+        </div>
+
+        <div class="campaign-grid">
+          <figure class="campaign-item campaign-item-1" data-reveal>
+            <div class="media campaign-media" data-parallax="0.06">
+              <img src="images/campaign-1.jpg" alt="Editorial portrait of a model in a black evening coat against a dark backdrop" width="900" height="1200" loading="lazy" decoding="async">
+            </div>
+            <figcaption>Chapter I &middot; Evening Tailoring</figcaption>
+          </figure>
+
+          <figure class="campaign-item campaign-item-2" data-reveal>
+            <div class="media campaign-media" data-parallax="-0.05">
+              <img src="images/campaign-2.jpg" alt="Close-up of gold jewellery and silk fabric in warm light" width="900" height="1200" loading="lazy" decoding="async">
+            </div>
+            <figcaption>Chapter II &middot; Gold Details</figcaption>
+          </figure>
+
+          <figure class="campaign-item campaign-item-3" data-reveal>
+            <div class="media campaign-media" data-parallax="0.08">
+              <img src="images/campaign-3.jpg" alt="Model walking in a long dark knit coat on a city street at dusk" width="900" height="1200" loading="lazy" decoding="async">
+            </div>
+            <figcaption>Chapter III &middot; After Dark</figcaption>
+          </figure>
+        </div>
+
+        <div class="campaign-cta" data-reveal>
+          <a href="#arrivals" class="btn btn-outline" data-magnetic>Explore the Edit</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 8. NEWSLETTER (DEMO) ===== -->
+    <section class="section newsletter" id="newsletter" aria-labelledby="newsletterTitle">
+      <div class="container newsletter-inner">
+
+        <p class="eyebrow" data-reveal>The Journal</p>
+        <h2 class="section-title" id="newsletterTitle" data-reveal>Join the inner circle</h2>
+        <p class="section-lead" data-reveal>
+          Early access to new collections, private editorials and quiet invitations.
+        </p>
+
+        <form class="newsletter-form" id="newsletterForm" novalidate data-reveal>
+          <div class="form-group">
+            <label for="newsletterEmail">Email address</label>
+            <input type="email" id="newsletterEmail" name="email" autocomplete="email"
+                   placeholder="you@example.com" aria-describedby="newsletterEmail-error">
+            <small class="error-text" id="newsletterEmail-error"></small>
+          </div>
+
+          <button type="submit" class="btn btn-gold">Subscribe (Demo)</button>
+
+          <p class="form-result" id="newsletterResult" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="form-fineprint" data-reveal>
+          <span class="demo-badge">Demo form</span>
+          This website has no server. Your email is not stored or sent anywhere, and no subscription is created.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== 9. FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <a href="#home" class="logo" aria-label="VELOURA - back to top">VELOURA</a>
+          <p>Quiet luxury fashion for women and men.</p>
+
+          <ul class="social-list">
+            <li>
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-instagram"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube (opens in a new tab)">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-youtube"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in a new tab)">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-facebook"></use></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <nav class="footer-col" aria-label="Shop links">
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="#arrivals" data-filter-link="all">New In</a></li>
+            <li><a href="#arrivals" data-filter-link="women">Women</a></li>
+            <li><a href="#arrivals" data-filter-link="men">Men</a></li>
+            <li><a href="#arrivals" data-filter-link="accessories">Accessories</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-col" aria-label="The House links">
+          <h3>The House</h3>
+          <ul>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#campaign">The Campaign</a></li>
+            <li><a href="#newsletter">The Journal</a></li>
+          </ul>
+        </nav>
+
+        <!-- TO EDIT LATER: replace these placeholder lines with your real details -->
+        <div class="footer-col">
+  <h3>Contact</h3>
+  <ul class="placeholder-list">
+    <li>Email: <a href="mailto:gopikathilaga64@gmail.com">gopikathilaga64@gmail.com</a></li>
+    <li>Phone: Contact via Email</li>
+    <li>Studio: Online Fashion Studio</li>
+  </ul>
+</div>
+
+      </div>
+      <div class="footer-bottom">
+  <p>
+    &copy; <span id="year">2026</span> Veloura. Designed as a portfolio project.
+  </p>
+</div>
+
+    </div>
+  </footer>
+
+  <!-- ===== 10. SHOPPING BAG DRAWER ===== -->
+  <div class="bag-overlay" id="bagOverlay" hidden></div>
+
+  <aside class="bag-drawer" id="bagDrawer" role="dialog" aria-modal="true" aria-labelledby="bagTitle" aria-hidden="true" tabindex="-1">
+
+    <div class="bag-header">
+      <h2 id="bagTitle">Your Bag <span class="bag-title-count" id="bagTitleCount">(0)</span></h2>
+      <button type="button" class="bag-close" id="bagClose" aria-label="Close shopping bag">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg>
+      </button>
+    </div>
+
+    <div class="bag-body">
+
+      <!-- shown when the bag is empty -->
+      <div class="bag-empty" id="bagEmpty">
+        <svg class="icon bag-empty-icon" aria-hidden="true" focusable="false"><use href="#icon-bag"></use></svg>
+        <p>Your bag is empty.</p>
+        <button type="button" class="btn btn-outline" id="bagContinue">Continue Shopping</button>
+      </div>
+
+      <!-- items are added here by script.js -->
+      <ul class="bag-items" id="bagItems"></ul>
+
+    </div>
+
+    <div class="bag-footer" id="bagFooter">
+      <div class="bag-total-row">
+        <span>Subtotal</span>
+        <strong id="bagSubtotal">$0</strong>
+      </div>
+      <p class="bag-note">Shipping and taxes would be calculated at checkout in a real store.</p>
+
+      <button type="button" class="btn btn-gold btn-full" id="checkoutButton">Checkout (Demo)</button>
+      <button type="button" class="bag-clear" id="bagClear">Clear bag</button>
+
+      <p class="bag-message" id="bagMessage" role="status" aria-live="polite"></p>
+    </div>
+
+  </aside>
+
+  <!-- Small pop-up message, for example "Added to bag" -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Template for one bag item (script.js copies this for each product) -->
+  <template id="bagItemTemplate">
+    <li class="bag-item">
+      <div class="media bag-item-media">
+        <img src="" alt="" width="160" height="200" loading="lazy" decoding="async">
+      </div>
+      <div class="bag-item-body">
+        <p class="bag-item-name"></p>
+        <p class="bag-item-price"></p>
+
+        <div class="qty">
+          <button type="button" class="qty-btn" data-action="decrease" aria-label="Decrease quantity">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-minus"></use></svg>
+          </button>
+          <span class="qty-value" aria-live="polite">1</span>
+          <button type="button" class="qty-btn" data-action="increase" aria-label="Increase quantity">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="bag-item-side">
+        <p class="bag-item-line"></p>
+        <button type="button" class="bag-remove" data-action="remove" aria-label="Remove item">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-trash"></use></svg>
+        </button>
+      </div>
+    </li>
+  </template>
+
+  <!-- ===== SCRIPTS ===== -->
+  <!-- Three.js (free, pinned version) draws the 3D hero sculpture.
+       If it fails to load, script.js shows the CSS rings instead. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
