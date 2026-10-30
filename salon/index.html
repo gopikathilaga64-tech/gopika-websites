@@ -1,1 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luxe Beauty Salon - a premium salon for hair, skin, nails and bridal beauty. Portfolio demo website.">
+  <meta name="theme-color" content="#0b0a0a">
+  <title>Luxe Beauty Salon | Where Beauty Becomes Art</title>
 
+  <!-- Marks the page as "JavaScript is on". The CSS uses this so nothing stays hidden if JavaScript fails. -->
+  <script>document.documentElement.classList.add("js");</script>
+
+  <!-- Google Fonts (free). If they fail to load, the CSS falls back to Georgia and system fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Your styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== ICON SET (small line icons used across the page; hidden from view) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-10.5a6.5 6.5 0 1 1 13 0C18.5 15.4 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="10.5" r="2.3" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.3a11 11 0 0 0 5.7 5.7l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-quote" viewBox="0 0 32 24"><path d="M0 24V13.5C0 6 4 1.5 11 0l1 2.6C8 4 6.4 6.4 6.2 10H12v14H0zm18 0V13.5C18 6 22 1.5 29 0l1 2.6c-4 1.4-5.6 3.8-5.8 7.4H30v14H18z" fill="currentColor"/></symbol>
+    <symbol id="icon-diamond" viewBox="0 0 24 24"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-drag" viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <!-- Lets keyboard users jump straight to the content -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ===== 1. NAVIGATION ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+
+      <a href="#home" class="logo" aria-label="Luxe Beauty Salon - back to top">
+        <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <path d="M20 3l4 13 13 4-13 4-4 13-4-13-13-4 13-4z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text">LUXE <small>Beauty Salon</small></span>
+      </a>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#treatments" class="nav-link">Treatments</a></li>
+          <li><a href="#results" class="nav-link">Results</a></li>
+          <li><a href="#reviews" class="nav-link">Reviews</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li class="nav-book"><a href="#booking" class="btn btn-gold">Book an Appointment</a></li>
+        </ul>
+      </nav>
+
+      <a href="#booking" class="btn btn-outline header-cta" data-magnetic>Book Now</a>
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== 2. HERO ===== -->
+    <section class="hero" id="home" aria-labelledby="heroTitle">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <canvas class="hero-dust" id="goldDust" aria-hidden="true"></canvas>
+
+      <div class="container hero-content">
+        <p class="eyebrow hero-eyebrow">Hair &middot; Skin &middot; Nails &middot; Bridal</p>
+
+        <h1 class="hero-title" id="heroTitle">
+          <span class="line"><span class="line-inner">Where beauty</span></span>
+          <span class="line"><span class="line-inner">becomes <em>art</em>.</span></span>
+        </h1>
+
+        <p class="hero-text">
+          An intimate salon experience, crafted around you. Expert hands,
+          exceptional products and a calm space made for you to unwind.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#booking" class="btn btn-gold" data-magnetic>Book an Appointment</a>
+          <a href="#services" class="link-arrow">
+            Explore Services
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
+          </a>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" aria-label="Scroll to the About section">
+        <span class="scroll-cue-line"></span>
+        <span class="scroll-cue-text">Scroll</span>
+      </a>
+    </section>
+
+    <!-- ===== 3. ABOUT ===== -->
+    <section class="section about" id="about" aria-labelledby="aboutTitle">
+      <div class="container about-grid">
+
+        <div class="about-visual" data-reveal>
+          <div class="about-img about-img-1" role="img" aria-label="Salon interior with warm lighting and styling chairs"></div>
+          <div class="about-img about-img-2" role="img" aria-label="Close-up of a stylist preparing hair products"></div>
+          <span class="about-frame" aria-hidden="true"></span>
+        </div>
+
+        <div class="about-copy">
+          <p class="eyebrow" data-reveal>Our Story</p>
+          <h2 class="section-title" id="aboutTitle" data-reveal>A quiet luxury, made personal</h2>
+          <p data-reveal>
+            Luxe was created for people who see beauty as a ritual, not a rush.
+            Every visit begins with a conversation, so we understand your style,
+            your skin and your story before we touch a single brush.
+          </p>
+          <p data-reveal>
+            Our team blends modern technique with timeless craft, using
+            carefully chosen professional products in a space designed to feel
+            like an escape from the day.
+          </p>
+
+          <ul class="stats" data-reveal>
+            <li>
+              <span class="stat-number"><span data-count="10">10</span>+</span>
+              <span class="stat-label">Years of artistry</span>
+            </li>
+            <li>
+              <span class="stat-number"><span data-count="40">40</span>+</span>
+              <span class="stat-label">Signature treatments</span>
+            </li>
+            <li>
+              <span class="stat-number"><span data-count="12">12</span></span>
+              <span class="stat-label">Specialist stylists</span>
+            </li>
+          </ul>
+          <p class="demo-note" data-reveal>Sample figures for this portfolio demo.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 4. SERVICES ===== -->
+    <section class="section services" id="services" aria-labelledby="servicesTitle">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="eyebrow" data-reveal>Beauty Services</p>
+          <h2 class="section-title" id="servicesTitle" data-reveal>Crafted for every detail</h2>
+          <p class="section-lead" data-reveal>
+            Prices are samples for this demo. Choose a service to start a booking request.
+          </p>
+        </div>
+
+        <ol class="service-list">
+
+          <li class="service-row" data-reveal>
+            <span class="service-number">01</span>
+            <div class="service-body">
+              <h3>Hair Styling &amp; Colour</h3>
+              <p>Precision cuts, glossy colour and finishing that holds its shape beautifully.</p>
+            </div>
+            <span class="service-price">From $85</span>
+            <a href="#booking" class="service-book" data-service="hair" aria-label="Book Hair Styling and Colour">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
+            </a>
+          </li>
+
+          <li class="service-row" data-reveal>
+            <span class="service-number">02</span>
+            <div class="service-body">
+              <h3>Signature Facials</h3>
+              <p>Deeply restorative skin care tailored to your skin, from radiance to renewal.</p>
+            </div>
+            <span class="service-price">From $110</span>
+            <a href="#booking" class="service-book" data-service="facial" aria-label="Book Signature Facials">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
+            </a>
+          </li>
+
+          <li class="service-row" data-reveal>
+            <span class="service-number">03</span>
+            <div class="service-body">
+              <h3>Manicure &amp; Pedicure</h3>
+              <p>Meticulous nail care with long-wear polish and a relaxing hand and foot massage.</p>
+            </div>
+            <span class="service-price">From $55</span>
+            <a href="#booking" class="service-book" data-service="nails" aria-label="Book Manicure and Pedicure">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
+            </a>
+          </li>
+
+          <li class="service-row" data-reveal>
+            <span class="service-number">04</span>
+            <div class="service-body">
+              <h3>Brows &amp; Lashes</h3>
+              <p>Shaping, tinting and lifting that frame the eyes and keep a natural look.</p>
+            </div>
+            <span class="service-price">From $45</span>
+            <a href="#booking" class="service-book" data-service="brows" aria-label="Book Brows and Lashes">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
+            </a>
+          </li>
+
+          <li class="service-row" data-reveal>
+            <span class="service-number">05</span>
+            <div class="service-body">
+              <h3>Bridal &amp; Occasion Makeup</h3>
+              <p>Soft, camera-ready looks with a trial session so you feel completely certain.</p>
+            </div>
+            <span class="service-price">From $150</span>
+            <a href="#booking" class="service-book" data-service="bridal" aria-label="Book Bridal and Occasion Makeup">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
+            </a>
+          </li>
+
+          <li class="service-row" data-reveal>
+            <span class="service-number">06</span>
+            <div class="service-body">
+              <h3>Spa &amp; Massage Rituals</h3>
+              <p>Slow, restorative treatments that release tension and leave you glowing.</p>
+            </div>
+            <span class="service-price">From $95</span>
+            <a href="#booking" class="service-book" data-service="spa" aria-label="Book Spa and Massage Rituals">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
+            </a>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== 5. SIGNATURE TREATMENTS AND OFFERS ===== -->
+    <section class="section treatments" id="treatments" aria-labelledby="treatmentsTitle">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="eyebrow" data-reveal>Signature Treatments</p>
+          <h2 class="section-title" id="treatmentsTitle" data-reveal>Our most-loved rituals</h2>
+        </div>
+
+        <div class="treat-grid">
+
+          <article class="treat-card" data-tilt data-reveal>
+            <div class="treat-media treat-1" role="img" aria-label="Glowing skin after a facial treatment"></div>
+            <div class="treat-body">
+              <span class="treat-tag">Skin</span>
+              <h3>The Golden Hour Facial</h3>
+              <p>A 75-minute illuminating ritual with gentle exfoliation, a sculpting massage and a radiance mask.</p>
+              <p class="treat-meta">75 min &middot; $180</p>
+            </div>
+          </article>
+
+          <article class="treat-card" data-tilt data-reveal>
+            <div class="treat-media treat-2" role="img" aria-label="Smooth, glossy hair after a treatment"></div>
+            <div class="treat-body">
+              <span class="treat-tag">Hair</span>
+              <h3>Silk Ritual Hair Treatment</h3>
+              <p>Deep repair and a mirror-like finish, designed to leave hair soft, strong and full of movement.</p>
+              <p class="treat-meta">90 min &middot; $140</p>
+            </div>
+          </article>
+
+          <article class="treat-card" data-tilt data-reveal>
+            <div class="treat-media treat-3" role="img" aria-label="Elegant manicured hands"></div>
+            <div class="treat-body">
+              <span class="treat-tag">Nails</span>
+              <h3>Velvet Hands Manicure</h3>
+              <p>A luxurious manicure with a paraffin treatment and a polish finish that lasts for weeks.</p>
+              <p class="treat-meta">60 min &middot; $75</p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Special offers -->
+        <div class="offers" data-reveal>
+          <div class="offers-head">
+            <svg class="icon icon-gold" aria-hidden="true" focusable="false"><use href="#icon-diamond"></use></svg>
+            <h3>Special Offers</h3>
+            <span class="demo-badge">Sample offers</span>
+          </div>
+
+          <ul class="offers-list">
+            <li>
+              <strong>Welcome Gift</strong>
+              <span>15% off your first visit when you book online.</span>
+            </li>
+            <li>
+              <strong>Midweek Glow</strong>
+              <span>A complimentary scalp massage with any colour service, Tuesday to Thursday.</span>
+            </li>
+            <li>
+              <strong>Bridal Morning</strong>
+              <span>Hair and makeup for the bride and two guests, with a free trial session.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 6. BEFORE AND AFTER (DEMO) ===== -->
+    <section class="section results" id="results" aria-labelledby="resultsTitle">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="eyebrow" data-reveal>Results</p>
+          <h2 class="section-title" id="resultsTitle" data-reveal>See the difference</h2>
+          <p class="section-lead" data-reveal>
+            <span class="demo-badge">Demo content</span>
+            These panels are placeholders that show how the slider works. They are not real client results.
+            Replace them with client-approved photos.
+          </p>
+        </div>
+
+        <div class="compare-grid">
+
+          <figure class="compare-item" data-reveal>
+            <div class="compare compare-hair" data-compare>
+              <div class="compare-pane compare-before" role="img" aria-label="Before photo placeholder (demo)">
+                <span class="compare-label">Before &middot; Demo</span>
+                <span class="compare-note">Demo placeholder</span>
+              </div>
+              <div class="compare-pane compare-after" role="img" aria-label="After photo placeholder (demo)">
+                <span class="compare-label">After &middot; Demo</span>
+                <span class="compare-note">Demo placeholder</span>
+              </div>
+              <div class="compare-handle" aria-hidden="true">
+                <span class="compare-knob"><svg class="icon" focusable="false"><use href="#icon-drag"></use></svg></span>
+              </div>
+              <input type="range" class="compare-range" min="0" max="100" value="50"
+                     aria-label="Drag to compare before and after for the hair colour demo">
+            </div>
+            <figcaption>Hair colour transformation (demo)</figcaption>
+          </figure>
+
+          <figure class="compare-item" data-reveal>
+            <div class="compare compare-skin" data-compare>
+              <div class="compare-pane compare-before" role="img" aria-label="Before photo placeholder (demo)">
+                <span class="compare-label">Before &middot; Demo</span>
+                <span class="compare-note">Demo placeholder</span>
+              </div>
+              <div class="compare-pane compare-after" role="img" aria-label="After photo placeholder (demo)">
+                <span class="compare-label">After &middot; Demo</span>
+                <span class="compare-note">Demo placeholder</span>
+              </div>
+              <div class="compare-handle" aria-hidden="true">
+                <span class="compare-knob"><svg class="icon" focusable="false"><use href="#icon-drag"></use></svg></span>
+              </div>
+              <input type="range" class="compare-range" min="0" max="100" value="50"
+                     aria-label="Drag to compare before and after for the skin glow demo">
+            </div>
+            <figcaption>Skin glow facial (demo)</figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. TESTIMONIALS (PLACEHOLDERS) ===== -->
+    <section class="section reviews" id="reviews" aria-labelledby="reviewsTitle">
+      <div class="container reviews-inner">
+
+        <div class="section-head">
+          <p class="eyebrow" data-reveal>Kind Words</p>
+          <h2 class="section-title" id="reviewsTitle" data-reveal>What guests say</h2>
+          <p class="section-lead" data-reveal>
+            <span class="demo-badge">Placeholder content</span>
+            These are sample testimonials written for layout only. They are not real reviews.
+          </p>
+        </div>
+
+        <div class="reviews-slider" id="reviewsSlider" role="region" aria-roledescription="carousel" aria-label="Sample client testimonials" data-reveal>
+          <div class="reviews-track">
+
+            <figure class="review is-active">
+              <svg class="review-quote" aria-hidden="true" focusable="false"><use href="#icon-quote"></use></svg>
+              <blockquote>
+                <p>Placeholder testimonial: a calm, welcoming space and a stylist who listened closely to what I wanted.</p>
+              </blockquote>
+              <figcaption><strong>Sample Client A</strong><span>Placeholder testimonial</span></figcaption>
+            </figure>
+
+            <figure class="review">
+              <svg class="review-quote" aria-hidden="true" focusable="false"><use href="#icon-quote"></use></svg>
+              <blockquote>
+                <p>Placeholder testimonial: the facial felt unhurried and personal, and my skin looked rested afterwards.</p>
+              </blockquote>
+              <figcaption><strong>Sample Client B</strong><span>Placeholder testimonial</span></figcaption>
+            </figure>
+
+            <figure class="review">
+              <svg class="review-quote" aria-hidden="true" focusable="false"><use href="#icon-quote"></use></svg>
+              <blockquote>
+                <p>Placeholder testimonial: attention to detail from the first consultation to the final finishing touch.</p>
+              </blockquote>
+              <figcaption><strong>Sample Client C</strong><span>Placeholder testimonial</span></figcaption>
+            </figure>
+
+          </div>
+
+          <div class="reviews-controls">
+            <button class="round-btn" id="reviewPrev" type="button" aria-label="Previous testimonial">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-chevron-left"></use></svg>
+            </button>
+            <div class="review-dots" id="reviewDots" aria-hidden="true"></div>
+            <button class="round-btn" id="reviewNext" type="button" aria-label="Next testimonial">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-chevron-right"></use></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 8. BOOKING FORM (DEMO) ===== -->
+    <section class="section booking" id="booking" aria-labelledby="bookingTitle">
+      <div class="container booking-grid">
+
+        <div class="booking-intro">
+          <p class="eyebrow" data-reveal>Reserve Your Visit</p>
+          <h2 class="section-title" id="bookingTitle" data-reveal>Book an appointment</h2>
+          <p data-reveal>
+            Tell us what you would like and when. In a real salon this request
+            would go to the front desk, who would confirm your time.
+          </p>
+          <p class="demo-callout" data-reveal>
+            <span class="demo-badge">Demo form</span>
+            This website has no server. Submitting the form only checks your details
+            and shows a summary here. <strong>No booking is made and nothing is confirmed.</strong>
+          </p>
+        </div>
+
+        <form class="booking-form" id="bookingForm" novalidate data-reveal>
+
+          <div class="form-group">
+            <label for="bookName">Full name</label>
+            <input type="text" id="bookName" name="name" autocomplete="name"
+                   placeholder="Your full name" aria-describedby="bookName-error">
+            <small class="error-text" id="bookName-error"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="bookService">Service</label>
+            <select id="bookService" name="service" aria-describedby="bookService-error">
+              <option value="">Choose a service</option>
+              <option value="hair">Hair Styling &amp; Colour</option>
+              <option value="facial">Signature Facials</option>
+              <option value="nails">Manicure &amp; Pedicure</option>
+              <option value="brows">Brows &amp; Lashes</option>
+              <option value="bridal">Bridal &amp; Occasion Makeup</option>
+              <option value="spa">Spa &amp; Massage Rituals</option>
+              <option value="golden-hour">The Golden Hour Facial (signature)</option>
+              <option value="silk-ritual">Silk Ritual Hair Treatment (signature)</option>
+              <option value="velvet-hands">Velvet Hands Manicure (signature)</option>
+            </select>
+            <small class="error-text" id="bookService-error"></small>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookDate">Preferred date</label>
+              <input type="date" id="bookDate" name="date" aria-describedby="bookDate-error">
+              <small class="error-text" id="bookDate-error"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="bookTime">Preferred time</label>
+              <select id="bookTime" name="time" aria-describedby="bookTime-error">
+                <option value="">Choose a time</option>
+                <option value="09:00">9:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="15:00">3:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="17:00">5:00 PM</option>
+              </select>
+              <small class="error-text" id="bookTime-error"></small>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-gold btn-full">Request Appointment (Demo)</button>
+
+          <div class="form-result" id="bookingResult" role="status" aria-live="polite"></div>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- ===== 9. CONTACT ===== -->
+    <section class="section contact" id="contact" aria-labelledby="contactTitle">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="eyebrow" data-reveal>Visit Us</p>
+          <h2 class="section-title" id="contactTitle" data-reveal>Come and unwind</h2>
+          <p class="section-lead" data-reveal>
+            <span class="demo-badge">Sample details</span>
+            The address, phone number and email below are placeholders for this demo.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+
+          <div class="contact-card" data-reveal>
+            <h3>Find us</h3>
+            <ul class="contact-list">
+              <li>
+                <svg class="icon icon-gold" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg>
+                <span>24 Gilded Lane, Mayfair Quarter<br>Sample City, 001002</span>
+              </li>
+              <li>
+                <svg class="icon icon-gold" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg>
+                <a href="tel:+123456789456">+12 345 678 9456</a>
+              </li>
+              <li>
+                <svg class="icon icon-gold" aria-hidden="true" focusable="false"><use href="#icon-mail"></use></svg>
+                <a href="mailto:hello@luxebeautysalon.example">hello@luxebeautysalon.example</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact-card" data-reveal>
+            <h3>
+              <svg class="icon icon-gold" aria-hidden="true" focusable="false"><use href="#icon-clock"></use></svg>
+              Opening hours
+            </h3>
+            <dl class="hours">
+              <div><dt>Monday &ndash; Friday</dt><dd>9:00 AM &ndash; 7:00 PM</dd></div>
+              <div><dt>Saturday</dt><dd>9:00 AM &ndash; 6:00 PM</dd></div>
+              <div><dt>Sunday</dt><dd>Closed</dd></div>
+            </dl>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+
+      <a href="#home" class="logo" aria-label="Luxe Beauty Salon - back to top">
+        <img src="images/logo.png" alt="Luxe Beauty Salon" class="logo-mark">
+        <span class="logo-text">LUXE <small>Beauty Salon</small></span>
+      </a>
+
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#treatments">Treatments</a></li>
+        <li><a href="#booking">Book</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <p class="footer-note">
+        &copy; <span id="year">2026</span> Luxe Beauty Salon.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <!-- GSAP + ScrollTrigger (we download these into the "libs" folder in a later step).
+       If they are missing, script.js uses a simple built-in fade-in instead. -->
+  <script src="script.js" defer></script>
+</body>
+</html>

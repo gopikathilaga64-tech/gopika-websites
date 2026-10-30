@@ -1,0 +1,1934 @@
+/* ==========================================================
+   LUXE BEAUTY SALON - style.css  (Part 1 of 2)
+   Concept: Noir & Champagne
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   1. DESIGN TOKENS (colours, fonts, timing)
+   Change a colour here and it changes everywhere.
+   ---------------------------------------------------------- */
+:root {
+  --noir: #0b0a0a;
+  --charcoal: #161312;
+  --charcoal-2: #1d1917;
+  --gold: #d4b483;
+  --gold-bright: #ecd3a5;
+  --gold-ink: #7a5c30;          /* darker gold, readable on ivory */
+  --blush: #e8c4c0;
+  --ivory: #f6efe6;
+  --ivory-soft: rgba(246, 239, 230, 0.78);
+  --ivory-faint: rgba(246, 239, 230, 0.55);
+  --line: rgba(212, 180, 131, 0.28);
+  --error: #f0a79e;
+
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Jost", "Helvetica Neue", Arial, sans-serif;
+
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --header-h: 84px;
+}
+
+
+/* ----------------------------------------------------------
+   2. RESET AND BASE
+   ---------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) - 10px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--noir);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote {
+  margin: 0;
+}
+
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--noir);
+}
+
+/* a clear gold outline for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 4px;
+}
+
+.container {
+  width: min(1200px, 90%);
+  margin-inline: auto;
+}
+
+/* "Skip to main content" link: hidden until you press Tab */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 2000;
+  padding: 0.8rem 1.2rem;
+  background: var(--gold);
+  color: var(--noir);
+  font-weight: 500;
+  transition: top 0.25s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+
+/* ----------------------------------------------------------
+   3. SHARED PIECES (icons, labels, titles, buttons)
+   ---------------------------------------------------------- */
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+}
+
+.icon-gold {
+  color: var(--gold);
+}
+
+/* small label above headings, with a gold line */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.eyebrow::before,
+.section-head .eyebrow::after {
+  content: "";
+  width: 2.4rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.section {
+  padding: clamp(5rem, 11vw, 9rem) 0;
+  position: relative;
+}
+
+.section-head {
+  max-width: 720px;
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  text-align: center;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5vw, 3.9rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.4rem;
+}
+
+.section-lead {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--ivory-soft);
+}
+
+.section-lead .demo-badge {
+  display: table;
+  margin: 0 auto 0.9rem;
+}
+
+/* label used on every piece of sample content */
+.demo-badge {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border: 1px solid var(--blush);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: var(--blush);
+  vertical-align: middle;
+}
+
+.demo-note {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--ivory-faint);
+}
+
+/* ----- Buttons ----- */
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.05rem 2.1rem;
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.4s var(--ease-out), background-color 0.4s var(--ease-out),
+              border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* buttons that the JavaScript pulls gently toward the cursor */
+.btn[data-magnetic] {
+  transition: transform 0.35s var(--ease-out), color 0.4s var(--ease-out),
+              background-color 0.4s var(--ease-out), border-color 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #ecd3a5, #d4b483 50%, #b8935d);
+  border-color: transparent;
+  color: var(--noir);
+  box-shadow: 0 10px 30px rgba(212, 180, 131, 0.2);
+}
+
+/* a soft shine that sweeps across on hover */
+.btn-gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.8s var(--ease-out);
+}
+
+.btn-gold:hover::before {
+  transform: translateX(120%);
+}
+
+.btn-gold:hover {
+  box-shadow: 0 14px 40px rgba(212, 180, 131, 0.38);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ivory);
+}
+
+.btn-outline:hover {
+  background: var(--gold);
+  color: var(--noir);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.4rem 0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.link-arrow .icon {
+  transition: transform 0.4s var(--ease-out);
+}
+
+.link-arrow:hover {
+  color: var(--gold);
+}
+
+.link-arrow:hover .icon {
+  transform: translateX(6px);
+}
+
+
+/* ----------------------------------------------------------
+   4. HEADER AND NAVIGATION
+   ---------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: transform 0.5s var(--ease-out);
+}
+
+/* the dark glass bar lives in a pseudo-element so it can fade in on scroll */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 10, 10, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.site-header.is-scrolled::before {
+  opacity: 1;
+}
+
+/* the script adds is-hidden when you scroll down */
+.site-header.is-hidden {
+  transform: translateY(-101%);
+}
+
+.header-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  height: var(--header-h);
+  transition: height 0.4s ease;
+}
+
+.site-header.is-scrolled .header-inner {
+  height: 68px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--ivory);
+}
+
+.logo-mark {
+  width: 2rem;
+  height: 2rem;
+  color: var(--gold);
+  transition: transform 0.8s var(--ease-out);
+}
+
+.logo:hover .logo-mark {
+  transform: rotate(90deg);
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  line-height: 1;
+}
+
+.logo-text small {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.2rem, 2.6vw, 2.8rem);
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 0;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ivory-soft);
+  transition: color 0.3s ease;
+}
+
+/* gold underline that grows from the centre */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: translateX(-50%);
+  transition: width 0.4s var(--ease-out);
+}
+
+.nav-link:hover,
+.nav-link.is-active {
+  color: var(--ivory);
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  width: 100%;
+}
+
+/* the booking button inside the menu is only for phones */
+.nav-book {
+  display: none;
+}
+
+.header-cta {
+  padding: 0.85rem 1.6rem;
+}
+
+/* hamburger button (phones and tablets only) */
+.menu-toggle {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 1.7rem;
+  height: 1.5px;
+  background: var(--ivory);
+  transition: transform 0.4s var(--ease-out);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(4.25px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  transform: translateY(-4.25px) rotate(-45deg);
+}
+
+
+/* ----------------------------------------------------------
+   5. HERO (full screen, cinematic)
+   ---------------------------------------------------------- */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 9rem 0 7rem;
+  overflow: hidden;
+  background: var(--noir);
+}
+
+/* the moving photo layer (the script can shift it slightly while you scroll) */
+.hero-media {
+  position: absolute;
+  inset: -6% 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Your photo first, then a warm gradient as a backup if the photo is missing */
+.hero-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    url("images/hero.jpg") center / cover no-repeat,
+    radial-gradient(circle at 75% 30%, rgba(212, 180, 131, 0.38), transparent 45%),
+    radial-gradient(circle at 15% 80%, rgba(232, 196, 192, 0.2), transparent 50%),
+    linear-gradient(160deg, #241a15, #0b0a0a 70%);
+  transform-origin: 60% 40%;
+  animation: slowZoom 26s ease-in-out infinite alternate;
+}
+
+/* dark layers so the text is always easy to read */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(11, 10, 10, 0.6) 0%, rgba(11, 10, 10, 0.2) 40%, rgba(11, 10, 10, 0.95) 100%),
+    radial-gradient(ellipse at 20% 60%, rgba(11, 10, 10, 0.65), transparent 60%);
+}
+
+.hero-dust {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-eyebrow {
+  animation: fadeUp 1s var(--ease-out) 0.2s both;
+}
+
+.hero-title {
+  max-width: 14ch;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 9.5vw, 8rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+
+/* each line slides up from behind a mask */
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.hero-title .line-inner {
+  display: block;
+  animation: lineUp 1.3s var(--ease-out) both;
+}
+
+.hero-title .line:nth-child(1) .line-inner { animation-delay: 0.35s; }
+.hero-title .line:nth-child(2) .line-inner { animation-delay: 0.55s; }
+
+.hero-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--blush);
+}
+
+.hero-text {
+  max-width: 34rem;
+  margin: 2rem 0 2.8rem;
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: var(--ivory-soft);
+  animation: fadeUp 1s var(--ease-out) 0.95s both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2.2rem;
+  animation: fadeUp 1s var(--ease-out) 1.1s both;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  transform: translateX(-50%);
+  font-size: 0.64rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ivory-faint);
+  animation: fadeIn 1.4s ease 1.6s both;
+}
+
+.scroll-cue-line {
+  position: relative;
+  width: 1px;
+  height: 3.5rem;
+  overflow: hidden;
+  background: rgba(212, 180, 131, 0.25);
+}
+
+.scroll-cue-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  animation: scrollLine 2.2s var(--ease-out) infinite;
+}
+
+
+/* ----------------------------------------------------------
+   6. ABOUT
+   ---------------------------------------------------------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(3rem, 7vw, 7rem);
+  align-items: center;
+}
+
+/* two overlapping photos with a thin gold frame behind them */
+.about-visual {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 5 / 6;
+}
+
+.about-img {
+  position: absolute;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.about-img-1 {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 76%;
+  height: 82%;
+  background:
+    url("images/about.jpg") center / cover no-repeat,
+    linear-gradient(160deg, #3c2d25, #161312);
+}
+
+.about-img-2 {
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 52%;
+  height: 46%;
+  border: 8px solid var(--noir);
+  background:
+    url("images/about.jpg") center / cover no-repeat,
+    linear-gradient(160deg, #d4b483, #6b4a2b);
+}
+
+.about-frame {
+  position: absolute;
+  top: 7%;
+  left: -5%;
+  z-index: 0;
+  width: 70%;
+  height: 78%;
+  border: 1px solid var(--gold);
+  opacity: 0.55;
+}
+
+.about-copy p {
+  margin-bottom: 1.2rem;
+  max-width: 34rem;
+  color: var(--ivory-soft);
+}
+
+.about-copy .section-title {
+  max-width: 14ch;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem clamp(1.5rem, 4vw, 3rem);
+  margin-top: 2.6rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.stat-label {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ivory-soft);
+}
+
+
+/* ----------------------------------------------------------
+   7. SERVICES (light ivory section for contrast)
+   ---------------------------------------------------------- */
+.services {
+  background: var(--ivory);
+  color: #2a2320;
+}
+
+.services .eyebrow {
+  color: var(--gold-ink);
+}
+
+.services .section-title {
+  color: #1a1513;
+}
+
+.services .section-lead {
+  color: #5f524a;
+}
+
+.service-list {
+  max-width: 960px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(26, 21, 19, 0.18);
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: 4rem 1fr auto 3.2rem;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 0.5rem;
+  border-bottom: 1px solid rgba(26, 21, 19, 0.18);
+  transition: padding 0.5s var(--ease-out), background-color 0.5s var(--ease-out);
+}
+
+.service-row:hover {
+  padding-inline: 1.5rem;
+  background: rgba(212, 180, 131, 0.16);
+}
+
+.service-number {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--gold-ink);
+}
+
+.service-body h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: #1a1513;
+}
+
+.service-body p {
+  max-width: 46ch;
+  margin-top: 0.4rem;
+  font-size: 0.98rem;
+  color: #5f524a;
+}
+
+.service-price {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-style: italic;
+  white-space: nowrap;
+  color: #1a1513;
+}
+
+.service-book {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 1px solid rgba(26, 21, 19, 0.3);
+  border-radius: 50%;
+  color: #1a1513;
+  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out),
+              border-color 0.4s ease, transform 0.4s var(--ease-out);
+}
+
+.service-row:hover .service-book,
+.service-book:focus-visible {
+  background: #1a1513;
+  border-color: #1a1513;
+  color: var(--gold);
+  transform: translateX(4px);
+}
+
+.services :focus-visible {
+  outline-color: var(--gold-ink);
+}
+/* ==========================================================
+   LUXE BEAUTY SALON - style.css  (Part 2 of 2)
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   8. SIGNATURE TREATMENTS (3D tilt cards) AND OFFERS
+   ---------------------------------------------------------- */
+.treatments {
+  background: var(--charcoal);
+}
+
+.treat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  perspective: 1400px;
+}
+
+/* The script sets --tilt-x and --tilt-y while the mouse moves over a card */
+.treat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--charcoal-2);
+  border: 1px solid var(--line);
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out),
+              border-color 0.45s ease;
+}
+
+.treat-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(212, 180, 131, 0.12);
+}
+
+/* soft light that follows the cursor (--mx and --my come from the script) */
+.treat-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.12), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.treat-card:hover::after {
+  opacity: 1;
+}
+
+.treat-media {
+  position: relative;
+  aspect-ratio: 4 / 4.4;
+  overflow: hidden;
+}
+
+/* the photo is on a pseudo-element so it can zoom inside its frame */
+.treat-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--img), var(--fallback);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 1.4s var(--ease-out);
+}
+
+.treat-card:hover .treat-media::before {
+  transform: scale(1.08);
+}
+
+/* fades the bottom of the photo into the card */
+.treat-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--charcoal-2), transparent 45%);
+}
+
+.treat-1 {
+  --img: url("images/treatment-1.jpg");
+  --fallback: linear-gradient(160deg, #e8c4c0, #8a5a4a);
+}
+
+.treat-2 {
+  --img: url("images/treatment-2.jpg");
+  --fallback: linear-gradient(160deg, #7a5a38, #1d1917);
+}
+
+.treat-3 {
+  --img: url("images/treatment-3.jpg");
+  --fallback: linear-gradient(160deg, #d4b483, #4a2f3a);
+}
+
+/* text floats slightly above the card for a sense of depth */
+.treat-body {
+  position: relative;
+  flex: 1;
+  padding: 1.6rem 1.8rem 2rem;
+  transform: translateZ(40px);
+}
+
+.treat-tag {
+  display: inline-block;
+  padding: 0.15rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.treat-body h3 {
+  margin-bottom: 0.8rem;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.treat-body p {
+  font-size: 0.97rem;
+  color: var(--ivory-soft);
+}
+
+.treat-body .treat-meta {
+  margin-top: 1.3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ----- Special offers ----- */
+.offers {
+  position: relative;
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding: clamp(1.8rem, 4vw, 3rem);
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(212, 180, 131, 0.09), rgba(232, 196, 192, 0.04));
+}
+
+/* thin inner frame for a "gift card" feel */
+.offers::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(212, 180, 131, 0.16);
+  pointer-events: none;
+}
+
+.offers-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.offers-head h3 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.offers-head .demo-badge {
+  margin-left: auto;
+}
+
+.offers-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.offers-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.offers-list strong {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.offers-list span {
+  font-size: 0.97rem;
+  color: var(--ivory-soft);
+}
+
+
+/* ----------------------------------------------------------
+   9. BEFORE AND AFTER (demo sliders)
+   ---------------------------------------------------------- */
+.results {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(232, 196, 192, 0.09), transparent 60%),
+    var(--noir);
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.compare-item figcaption {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ivory-faint);
+}
+
+/* The script changes --pos (0% to 100%) as you drag */
+.compare {
+  --pos: 50%;
+  position: relative;
+  aspect-ratio: 4 / 4.6;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.compare:has(.compare-range:focus-visible) {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 4px;
+}
+
+.compare-pane {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-align: center;
+}
+/* Hair before and after photos */
+.compare-hair .compare-before {
+  background: url("images/before-hair.jpg") center / cover no-repeat;
+  color: var(--ivory-soft);
+}
+
+.compare-hair .compare-after {
+  background: url("images/after-hair.jpg") center / cover no-repeat;
+  color: var(--noir);
+  clip-path: inset(0 0 0 var(--pos));
+}
+
+/* Facial before and after photos */
+.compare-skin .compare-before {
+  background: url("images/before-skin.jpg") center / cover no-repeat;
+  color: var(--ivory-soft);
+}
+
+.compare-skin .compare-after {
+  background: url("images/after-skin.jpg") center / cover no-repeat;
+  color: var(--noir);
+  clip-path: inset(0 0 0 var(--pos));
+}
+.compare-label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--line);
+  background: rgba(11, 10, 10, 0.72);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ivory);
+}
+
+.compare-after .compare-label {
+  left: auto;
+  right: 1rem;
+}
+
+.compare-note {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.compare-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  z-index: 2;
+  width: 2px;
+  background: var(--gold);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.compare-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: var(--noir);
+  color: var(--gold);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* an invisible slider on top that catches the mouse, finger and keyboard */
+.compare-range {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+
+/* ----------------------------------------------------------
+   10. TESTIMONIALS (placeholder slider)
+   ---------------------------------------------------------- */
+.reviews {
+  background: var(--charcoal);
+}
+
+.reviews-slider {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.review {
+  padding: 0 1rem 2rem;
+}
+
+.review-quote {
+  width: 2.5rem;
+  height: 1.9rem;
+  margin: 0 auto 1.6rem;
+  color: var(--gold);
+  opacity: 0.8;
+}
+
+.review blockquote p {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.review figcaption {
+  margin-top: 1.6rem;
+}
+
+.review figcaption strong {
+  display: block;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.review figcaption span {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blush);
+}
+
+/* the controls and the one-at-a-time layout only switch on when the script runs */
+.reviews-controls {
+  display: none;
+}
+
+.reveal-ready .reviews-track {
+  display: grid;
+}
+
+.reveal-ready .review {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 14px;
+  transition: opacity 0.7s ease, translate 0.7s var(--ease-out), visibility 0.7s;
+}
+
+.reveal-ready .review.is-active {
+  opacity: 1;
+  visibility: visible;
+  translate: none;
+}
+
+.reveal-ready .reviews-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.round-btn {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--gold);
+  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out),
+              border-color 0.4s ease;
+}
+
+.round-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--noir);
+}
+
+/* dots are <span class="dot"> elements created by the script */
+.review-dots {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: rgba(246, 239, 230, 0.25);
+  transition: background-color 0.4s ease, transform 0.4s var(--ease-out);
+}
+
+.dot.is-active {
+  background: var(--gold);
+  transform: scale(1.5);
+}
+
+
+/* ----------------------------------------------------------
+   11. BOOKING FORM (demo)
+   ---------------------------------------------------------- */
+.booking {
+  background:
+    radial-gradient(ellipse at 100% 100%, rgba(212, 180, 131, 0.1), transparent 55%),
+    var(--noir);
+}
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(3rem, 7vw, 6rem);
+  align-items: start;
+}
+
+.booking-intro p {
+  max-width: 30rem;
+  color: var(--ivory-soft);
+}
+
+.booking-intro .section-title {
+  max-width: 12ch;
+}
+
+.demo-callout {
+  margin-top: 2rem;
+  padding: 1.2rem 1.4rem;
+  border-left: 2px solid var(--blush);
+  background: rgba(232, 196, 192, 0.06);
+  font-size: 0.95rem;
+}
+
+.demo-callout .demo-badge {
+  display: table;
+  margin-bottom: 0.7rem;
+}
+
+.booking-form {
+  padding: clamp(1.8rem, 4vw, 3rem);
+  border: 1px solid var(--line);
+  background: var(--charcoal);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
+}
+
+.form-group {
+  margin-bottom: 1.7rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.8rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(246, 239, 230, 0.3);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--ivory);
+  font-size: 1.05rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input::placeholder {
+  color: var(--ivory-faint);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-bottom-color: var(--gold);
+  box-shadow: 0 1px 0 var(--gold);
+}
+
+.form-group input[type="date"] {
+  color-scheme: dark;
+}
+
+/* custom gold arrow for the drop-down lists */
+.form-group select {
+  padding-right: 1.8rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4b483' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 1.1rem;
+}
+
+.form-group select option {
+  background: var(--charcoal);
+  color: var(--ivory);
+}
+
+.error-text {
+  display: none;
+  margin-top: 0.45rem;
+  font-size: 0.84rem;
+  color: var(--error);
+}
+
+.form-group.error .error-text {
+  display: block;
+}
+
+.form-group.error input,
+.form-group.error select {
+  border-bottom-color: var(--error);
+}
+
+/* the demo summary or error message (filled by the script) */
+.form-result:empty {
+  display: none;
+}
+
+.form-result {
+  margin-top: 1.5rem;
+  padding: 1.2rem 1.4rem;
+  font-size: 0.97rem;
+  color: var(--ivory-soft);
+}
+
+.form-result.is-success {
+  border: 1px solid var(--gold);
+  background: rgba(212, 180, 131, 0.08);
+}
+
+.form-result.is-error {
+  border: 1px solid var(--error);
+  color: var(--error);
+}
+
+.form-result strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.form-result.is-error strong {
+  color: var(--error);
+}
+
+.form-result ul {
+  margin: 0.8rem 0;
+}
+
+.form-result li {
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed rgba(212, 180, 131, 0.22);
+}
+
+
+/* ----------------------------------------------------------
+   12. CONTACT
+   ---------------------------------------------------------- */
+.contact {
+  background: var(--charcoal);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.contact-card {
+  padding: clamp(1.8rem, 4vw, 2.7rem);
+  border: 1px solid var(--line);
+  background: rgba(246, 239, 230, 0.025);
+}
+
+.contact-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.4rem;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  color: var(--ivory-soft);
+}
+
+.contact-list .icon {
+  margin-top: 0.3rem;
+}
+
+.contact-list a {
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-list a:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.hours div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px dashed rgba(212, 180, 131, 0.25);
+}
+
+.hours div:last-child {
+  border-bottom: 0;
+}
+
+.hours dt {
+  color: var(--ivory-soft);
+}
+
+.hours dd {
+  margin: 0;
+  color: var(--ivory);
+}
+
+
+/* ----------------------------------------------------------
+   13. FOOTER
+   ---------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--noir);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.7rem;
+  padding: 3.5rem 0 2.5rem;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 2rem;
+}
+
+.footer-links a {
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ivory-soft);
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--gold);
+}
+
+.footer-note {
+  font-size: 0.8rem;
+  color: var(--ivory-faint);
+}
+
+
+/* ----------------------------------------------------------
+   14. ANIMATIONS
+   ---------------------------------------------------------- */
+@keyframes lineUp {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; translate: 0 24px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.12); }
+}
+
+@keyframes scrollLine {
+  0%   { transform: translateY(-100%); }
+  60%  { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+/* ----- Scroll reveal -----
+   Things only start hidden once the script adds "reveal-ready" to the page.
+   If the script fails, everything simply stays visible.
+   The script adds "is-visible" when an item scrolls into view. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  translate: 0 36px;
+  transition: opacity 0.9s var(--ease-out) var(--d, 0s),
+              translate 0.9s var(--ease-out) var(--d, 0s);
+}
+
+.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  translate: none;
+}
+
+/* these elements also have their own hover transitions, so we list both */
+.reveal-ready .treat-card[data-reveal] {
+  transition: opacity 0.9s var(--ease-out) var(--d, 0s),
+              translate 0.9s var(--ease-out) var(--d, 0s),
+              transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out),
+              border-color 0.45s ease;
+}
+
+.reveal-ready .service-row[data-reveal] {
+  transition: opacity 0.9s var(--ease-out) var(--d, 0s),
+              translate 0.9s var(--ease-out) var(--d, 0s),
+              padding 0.5s var(--ease-out), background-color 0.5s var(--ease-out);
+}
+
+/* the gold line in front of each label draws itself in */
+.reveal-ready .eyebrow[data-reveal]::before,
+.reveal-ready .section-head .eyebrow[data-reveal]::after {
+  transform: scaleX(0);
+  transition: transform 1s var(--ease-out) calc(var(--d, 0s) + 0.3s);
+}
+
+.reveal-ready .eyebrow[data-reveal]::before {
+  transform-origin: left;
+}
+
+.reveal-ready .section-head .eyebrow[data-reveal]::after {
+  transform-origin: right;
+}
+
+.reveal-ready .eyebrow[data-reveal].is-visible::before,
+.reveal-ready .section-head .eyebrow[data-reveal].is-visible::after {
+  transform: scaleX(1);
+}
+
+
+/* ----------------------------------------------------------
+   15. RESPONSIVE
+   ---------------------------------------------------------- */
+
+/* ----- Tablets and small laptops (up to 1024px) ----- */
+@media (max-width: 1024px) {
+  .treat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* the third card spans the full width, photo on the left */
+  .treat-card:last-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .treat-card:last-child .treat-media {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+
+  .treat-card:last-child .treat-body {
+    align-self: center;
+  }
+
+  .offers-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ----- Phone menu and stacked layouts (up to 960px) ----- */
+@media (max-width: 960px) {
+  :root {
+    --header-h: 72px;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .logo,
+  .menu-toggle {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* the menu becomes a full-screen overlay */
+  .primary-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1.5rem 3rem;
+    background: rgba(11, 10, 10, 0.98);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s var(--ease-out), visibility 0.5s;
+  }
+
+  .primary-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--ivory);
+  }
+
+  .nav-book {
+    display: block;
+    margin-top: 1rem;
+  }
+
+  /* menu items slide in one by one */
+  .nav-list li {
+    opacity: 0;
+    translate: 0 20px;
+    transition: opacity 0.6s var(--ease-out), translate 0.6s var(--ease-out);
+  }
+
+  .primary-nav.is-open .nav-list li {
+    opacity: 1;
+    translate: none;
+  }
+
+  .primary-nav.is-open .nav-list li:nth-child(1) { transition-delay: 0.10s; }
+  .primary-nav.is-open .nav-list li:nth-child(2) { transition-delay: 0.16s; }
+  .primary-nav.is-open .nav-list li:nth-child(3) { transition-delay: 0.22s; }
+  .primary-nav.is-open .nav-list li:nth-child(4) { transition-delay: 0.28s; }
+  .primary-nav.is-open .nav-list li:nth-child(5) { transition-delay: 0.34s; }
+  .primary-nav.is-open .nav-list li:nth-child(6) { transition-delay: 0.40s; }
+  .primary-nav.is-open .nav-list li:nth-child(7) { transition-delay: 0.46s; }
+
+  .hero {
+    padding-top: 7rem;
+  }
+
+  .about-grid,
+  .booking-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-visual {
+    margin-inline: auto;
+  }
+
+  .about-copy .section-title,
+  .booking-intro .section-title {
+    max-width: none;
+  }
+}
+
+/* ----- Large phones (up to 700px) ----- */
+@media (max-width: 700px) {
+  .treat-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .treat-card:last-child {
+    display: flex;
+  }
+
+  .treat-card:last-child .treat-media {
+    aspect-ratio: 4 / 4.4;
+    min-height: 0;
+  }
+
+  .compare-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .offers-head {
+    flex-wrap: wrap;
+  }
+
+  .offers-head .demo-badge {
+    margin-left: 0;
+  }
+}
+
+/* ----- Phones (up to 640px) ----- */
+@media (max-width: 640px) {
+  .logo-text {
+    font-size: 1.4rem;
+  }
+
+  .hero-title {
+    max-width: none;
+  }
+
+  .scroll-cue {
+    display: none;
+  }
+
+  /* service rows rearrange into a neat mobile layout */
+  .service-row {
+    grid-template-columns: 2.4rem 1fr 2.8rem;
+    grid-template-areas:
+      "num body book"
+      ".   price .";
+    gap: 0.4rem 1rem;
+    padding: 1.6rem 0.25rem;
+  }
+
+  .service-row:hover {
+    padding-inline: 0.75rem;
+  }
+
+  .service-number { grid-area: num; }
+  .service-body   { grid-area: body; }
+  .service-price  { grid-area: price; font-size: 1.15rem; }
+  .service-book   { grid-area: book; width: 2.8rem; height: 2.8rem; }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hours div {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+}
+
+/* ----- Touch screens: no hover-only effects ----- */
+@media (hover: none) {
+  .treat-card::after {
+    display: none;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   16. REDUCED MOTION
+   People who turn on "reduce motion" on their device get a calm, still version.
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    translate: none;
+  }
+}
+/* Fix treatment card price overflow */
+.treat-card {
+  min-width: 0;
+}
+
+.treat-body {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.treat-meta {
+  overflow-wrap: anywhere;
+}
+/* Fix treatment price alignment */
+.treat-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.treat-body {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+}
+
+.treat-body .treat-meta {
+  display: block;
+  width: 100%;
+  overflow-wrap: break-word;
+  margin-bottom: 0;
+}
+/* Keep the mobile navbar above page content */
+@media (max-width: 700px) {
+  .site-header {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .site-header.is-scrolled .header-inner {
+    height: 72px;
+  }
+}
+/* Keep booking form clear of the fixed header */
+#booking {
+  scroll-margin-top: 90px;
+}
+
+#bookingForm {
+  scroll-margin-top: 90px;
+}
+/* Mobile header should not cover booking form */
+@media (max-width: 700px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+  }
+}
